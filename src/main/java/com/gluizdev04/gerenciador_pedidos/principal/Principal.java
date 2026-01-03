@@ -43,6 +43,7 @@ public class Principal {
                     10 - Ver quantos produtos um categoria específica possui
                     11 - Ver produtos a cima de um valor específico
                     12 - Ver produtos com preço menor que o desejado ou através de um trecho do nome do produto
+                    13 - Ver pedidos realizados após uma data
                     
                     0 - Sair                                 
                     """;
@@ -86,6 +87,9 @@ public class Principal {
                     break;
                 case 12:
                     buscarProdutosPorPrecoOuTrecho();
+                    break;
+                case 13:
+                    buscarPedidosFeitosAposUmData();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -249,6 +253,15 @@ public class Principal {
         } else {
             System.out.println("Nenhum produto foi encontrado!");
         }
+    }
+
+    private void buscarPedidosFeitosAposUmData() {
+        System.out.println("Ver pedidos feitos após qual data (yyyy-MM-dd)? ");
+        var dataString = entrada.nextLine();
+        LocalDate data = LocalDate.parse(dataString);
+        List<Pedido> pedidosEncontrados = pedidoRepository.findByDataAfter(data);
+
+        pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " +p.getData()));
     }
 
     public void criarFornecedores() {
