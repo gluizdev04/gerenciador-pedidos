@@ -40,6 +40,7 @@ public class Principal {
                     7 - Produtos com data de entrega
                     8 - Ver produtos de uma categoria específica ordenados pelo preço de forma crescente
                     9 - Ver produtos de uma categoria específica ordenados pelo preço de forma decrescente
+                    10 - Ver quantos produtos um categoria específica possui
                     
                     0 - Sair                                 
                     """;
@@ -74,6 +75,9 @@ public class Principal {
                     break;
                 case 9:
                     buscarProdutosPorCategoriaPrecoDecrescente();
+                    break;
+                case 10:
+                    buscarQuantiaDeProdutosPorCategoria();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -203,6 +207,16 @@ public class Principal {
         } else {
             System.out.println("A categoria " + categoriaDesejada + " não possui nenhum produtos!");
         }
+    }
+
+    private void buscarQuantiaDeProdutosPorCategoria() {
+        List<Categoria> categorias = categoriaRepository.findAll();
+        categorias.forEach(c -> System.out.println(c.getNome()));
+        System.out.print("Digite e categoria que deseja contar: ");
+        var categoriaParaContagem = entrada.nextLine();
+
+        long categoriaContada = produtoRepository.countByCategoriaNomeIgnoreCase(categoriaParaContagem);
+        System.out.println("A categoria " + categoriaParaContagem + " possui " + categoriaContada + " produtos");
     }
 
     public void criarFornecedores() {
