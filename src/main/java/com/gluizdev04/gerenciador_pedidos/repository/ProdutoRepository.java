@@ -13,4 +13,5 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     List<Produto> findByPrecoLessThan(double valor);
     Optional<Produto> findByNomeContainingIgnoreCase(String nome);
     List<Produto> findByCategoriaNomeIgnoreCaseOrderByPrecoAsc(String nome);
+    List<Produto> findByCategoriaNomeIgnoreCaseOrderByPrecoDesc(String nome);
 }

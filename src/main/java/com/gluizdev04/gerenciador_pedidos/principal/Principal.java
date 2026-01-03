@@ -39,6 +39,7 @@ public class Principal {
                     6 - Produtos que não possuem data de entrega
                     7 - Produtos com data de entrega
                     8 - Ver produtos de uma categoria específica ordenados pelo preço de forma crescente
+                    9 - Ver produtos de uma categoria específica ordenados pelo preço de forma decrescente
                     
                     0 - Sair                                 
                     """;
@@ -70,6 +71,9 @@ public class Principal {
                     break;
                 case 8:
                     buscarProdutosPorCategoriaPrecoCrescente();
+                    break;
+                case 9:
+                    buscarProdutosPorCategoriaPrecoDecrescente();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -179,6 +183,22 @@ public class Principal {
 
         if (!produtosEncontrados.isEmpty()) {
             System.out.println("A categoria " + categoriaDesejada + " possui os seguintes produtos (ordenados por preço de forma crescente):");
+            produtosEncontrados.forEach(p -> System.out.println(p.getNome() + " valor: " + p.getPreco()));
+        } else {
+            System.out.println("A categoria " + categoriaDesejada + " não possui nenhum produtos!");
+        }
+    }
+
+    private void buscarProdutosPorCategoriaPrecoDecrescente() {
+        List<Categoria> categorias = categoriaRepository.findAll();
+        categorias.forEach(c -> System.out.println(c.getNome()));
+        System.out.print("Ver produtos de qual categoria? ");
+        var categoriaDesejada = entrada.nextLine();
+
+        List<Produto> produtosEncontrados = produtoRepository.findByCategoriaNomeIgnoreCaseOrderByPrecoDesc(categoriaDesejada);
+
+        if (!produtosEncontrados.isEmpty()) {
+            System.out.println("A categoria " + categoriaDesejada + " possui os seguintes produtos (ordenados por preço de forma decrescente):");
             produtosEncontrados.forEach(p -> System.out.println(p.getNome() + " valor: " + p.getPreco()));
         } else {
             System.out.println("A categoria " + categoriaDesejada + " não possui nenhum produtos!");
