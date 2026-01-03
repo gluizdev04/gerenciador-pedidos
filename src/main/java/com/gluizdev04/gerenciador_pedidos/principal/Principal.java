@@ -41,6 +41,7 @@ public class Principal {
                     8 - Ver produtos de uma categoria específica ordenados pelo preço de forma crescente
                     9 - Ver produtos de uma categoria específica ordenados pelo preço de forma decrescente
                     10 - Ver quantos produtos um categoria específica possui
+                    11 - Ver produtos a cima de um valor específico
                     
                     0 - Sair                                 
                     """;
@@ -78,6 +79,9 @@ public class Principal {
                     break;
                 case 10:
                     buscarQuantiaDeProdutosPorCategoria();
+                    break;
+                case 11:
+                    buscarQuantiaDeProdutosACimaDeUmValor();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -217,6 +221,14 @@ public class Principal {
 
         long categoriaContada = produtoRepository.countByCategoriaNomeIgnoreCase(categoriaParaContagem);
         System.out.println("A categoria " + categoriaParaContagem + " possui " + categoriaContada + " produtos");
+    }
+
+    private void buscarQuantiaDeProdutosACimaDeUmValor() {
+        System.out.print("Ver quantia de produtos a cima de qual valor?");
+        var valor = entrada.nextDouble();
+        long quantiaProduto = produtoRepository.countByPrecoGreaterThan(valor);
+
+        System.out.println(quantiaProduto + " a cima de R$" + valor);
     }
 
     public void criarFornecedores() {
