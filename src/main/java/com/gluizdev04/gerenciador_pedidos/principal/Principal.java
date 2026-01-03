@@ -173,7 +173,7 @@ public class Principal {
         List<Categoria> categorias = categoriaRepository.findAll();
         categorias.forEach(c -> System.out.println(c.getNome()));
         System.out.print("Ver produtos de qual categoria? ");
-        var categoriaDesejada =entrada.nextLine();
+        var categoriaDesejada = entrada.nextLine();
 
         List<Produto> produtosEncontrados = produtoRepository.findByCategoriaNomeIgnoreCaseOrderByPrecoAsc(categoriaDesejada);
 
@@ -185,181 +185,127 @@ public class Principal {
         }
     }
 
-//    public void criarFornecedores() {
-//        Fornecedor fornSamsung = new Fornecedor("Samsung Logística");
-//        Fornecedor fornFastShop = new Fornecedor("Fast Shop Distribuidora");
-//        Fornecedor fornKabum = new Fornecedor("Kabum Log");
-//        Fornecedor fornArno = new Fornecedor("Arno Factory");
-//
-//        fornecedorRepository.saveAll(List.of(fornSamsung, fornFastShop, fornKabum, fornArno));
-//
-//    }
-//
-//    public void criarCategoria() {
-//        Categoria catEletronicos = new Categoria("Eletrônicos");
-//        Categoria catEletrodomesticos = new Categoria("Eletrodomésticos");
-//        Categoria catGamer = new Categoria("Gamer");
-//
-//        categoriaRepository.saveAll(List.of(catEletronicos, catEletrodomesticos, catGamer));
-//
-//    }
-//
-//    public void criarProdutos() {
-//        List<Produto> produtos = new ArrayList<>();
-//        produtos.add(new Produto("Smartphone Galaxy S23", 4500.00, fornecedorRepository.getReferenceById(7L), categoriaRepository.getReferenceById(25L)));
-//        produtos.add(new Produto("Notebook Dell XPS", 8900.00, fornecedorRepository.getReferenceById(8L), categoriaRepository.getReferenceById(25L)));
-//        produtos.add(new Produto("Monitor LG Ultrawide 29", 1200.00, fornecedorRepository.getReferenceById(9L), categoriaRepository.getReferenceById(25L)));
-//        produtos.add(new Produto("Tablet Tab S9", 3200.00, fornecedorRepository.getReferenceById(7L), categoriaRepository.getReferenceById(25L)));
-//        produtos.add(new Produto("Smartwatch Watch 5", 1500.00, fornecedorRepository.getReferenceById(7L), categoriaRepository.getReferenceById(25L)));
-//
-//        produtos.add(new Produto("Geladeira Frost Free", 3100.00, fornecedorRepository.getReferenceById(8L), categoriaRepository.getReferenceById(26L)));
-//        produtos.add(new Produto("Microondas Inox", 800.00, fornecedorRepository.getReferenceById(8L), categoriaRepository.getReferenceById(26L)));
-//        produtos.add(new Produto("Air Fryer Family", 450.00, fornecedorRepository.getReferenceById(10L), categoriaRepository.getReferenceById(26L)));
-//        produtos.add(new Produto("Cafeteira Expresso", 600.00, fornecedorRepository.getReferenceById(10L), categoriaRepository.getReferenceById(26L)));
-//        produtos.add(new Produto("Aspirador Robô", 1800.00, fornecedorRepository.getReferenceById(9L), categoriaRepository.getReferenceById(26L)));
-//
-//        produtos.add(new Produto("Mouse Logitech G Pro", 650.00, fornecedorRepository.getReferenceById(9L), categoriaRepository.getReferenceById(27L)));
-//        produtos.add(new Produto("Teclado Mecânico HyperX", 750.00, fornecedorRepository.getReferenceById(9L), categoriaRepository.getReferenceById(27L)));
-//        produtos.add(new Produto("Headset Cloud Stinger", 350.00, fornecedorRepository.getReferenceById(9L), categoriaRepository.getReferenceById(27L)));
-//        produtos.add(new Produto("Cadeira Gamer DX", 1200.00, fornecedorRepository.getReferenceById(8L), categoriaRepository.getReferenceById(27L)));
-//        produtos.add(new Produto("Placa de Vídeo RTX 4060", 2500.00, fornecedorRepository.getReferenceById(9L), categoriaRepository.getReferenceById(27L)));
-//
-//        produtoRepository.saveAll(produtos);
-//    }
-//
-//    public void criarPedidos() {
-//        List<Pedido> pedidos = new ArrayList<>();
-//
-//        Pedido pedidoGamer = new Pedido(
-//                LocalDate.now().minusMonths(1),
-//                LocalDate.now().minusMonths(1).plusDays(7),
-//                Arrays.asList(produtoRepository.getReferenceById(51L),
-//                        produtoRepository.getReferenceById(52L),
-//                        produtoRepository.getReferenceById(53L),
-//                        produtoRepository.getReferenceById(55L))
-//        );
-//        pedidos.add(pedidoGamer);
-//
-//        Pedido pedidoCozinha = new Pedido(
-//                LocalDate.now().minusWeeks(2),
-//                LocalDate.now().minusWeeks(2).plusDays(3),
-//                Arrays.asList(produtoRepository.getReferenceById(46L),
-//                        produtoRepository.getReferenceById(47L))
-//        );
-//        pedidos.add(pedidoCozinha);
-//
-//        Pedido pedidoHomeOffice = new Pedido(
-//                LocalDate.now(), // Data de hoje
-//                LocalDate.now().plusDays(5),
-//                Arrays.asList(produtoRepository.getReferenceById(42L),
-//                        produtoRepository.getReferenceById(43L))
-//        );
-//        pedidos.add(pedidoHomeOffice);
-//
-//        Pedido pedidoCafe = new Pedido(
-//                LocalDate.now().minusDays(1),
-//                LocalDate.now().plusDays(1),
-//                Arrays.asList(produtoRepository.getReferenceById(49L))
-//        );
-//        pedidos.add(pedidoCafe);
-//
-//        Pedido pedidoMix = new Pedido(
-//                LocalDate.now().minusMonths(2),
-//                LocalDate.now().minusMonths(2).plusDays(10),
-//                Arrays.asList(produtoRepository.getReferenceById(44L),
-//                        produtoRepository.getReferenceById(48L))
-//        );
-//        pedidos.add(pedidoMix);
-//
-//        Pedido pedidoPendente = new Pedido(
-//                LocalDate.now(),
-//                null,
-//                Arrays.asList(produtoRepository.getReferenceById(41L),
-//                        produtoRepository.getReferenceById(45L)) // Ex: Galaxy S23 + Smartwatch
-//        );
-//        pedidos.add(pedidoPendente);
-//
-//        pedidoRepository.saveAll(pedidos);
-//
-//        System.out.println("5 Pedidos criados com sucesso! 📦");
-//    }
-//
-//    public void principal() {
-//        Categoria categoriaEletronicos = new Categoria("Eletrônicos");
-//        Categoria categoriaLivros = new Categoria("Livros");
-//
-//        Produto produto1 = new Produto("Entendendo Java", 89.90, categoriaLivros);
-//        Produto produto2 = new Produto("Entendendo Spring framework", 99.99, categoriaLivros);
-//        Produto produto3 = new Produto("Iphone 12", 1980.99, categoriaEletronicos);
-//        Produto produto4 = new Produto("Moto G7 Play", 290.90, categoriaEletronicos);
-//
-//        categoriaEletronicos.setProdutos(List.of(produto3, produto4));
-//        categoriaLivros.setProdutos(List.of(produto1, produto2));
-//
-//        categoriaRepository.saveAll(List.of(categoriaEletronicos, categoriaLivros));
-//    }
-//
-//    public void fazendoPedido(){
-//        Produto produto1 = produtoRepository.findById(37L).get();
-//        Produto produto2 = produtoRepository.findById(38L).get();
-//        Produto produto3 = produtoRepository.findById(39L).get();
-//        Produto produto4 = produtoRepository.findById(40L).get();
-//
-//        System.out.println(produto1);
-//        System.out.println(produto2);
-//        System.out.println(produto3);
-//        System.out.println(produto4);
-//
-//        Pedido pedidoLuiz = new Pedido(LocalDate.now());
-//        Pedido pedidoNamorada = new Pedido(LocalDate.now());
-//
-//        pedidoLuiz.setProdutos(List.of(produto3, produto4));
-//        pedidoNamorada.setProdutos(List.of(produto1));
-//
-//        pedidoRepository.saveAll(List.of(pedidoLuiz, pedidoNamorada));
-//        System.out.println("Pedido feito com sucesso!");
-//    }
-//
-//    public void testandoFornecedor(){
-//        Fornecedor fornecedorEletronicos = new Fornecedor("Luiz Eletrônicos");
-//        Fornecedor fornecedorLivros = new Fornecedor("Livraria Mariani");
-//        fornecedorRepository.saveAll(List.of(fornecedorLivros, fornecedorEletronicos));
-//
-//        Produto produto1 = produtoRepository.findById(37L).get();
-//        Produto produto2 = produtoRepository.findById(38L).get();
-//        Produto produto3 = produtoRepository.findById(39L).get();
-//        Produto produto4 = produtoRepository.findById(40L).get();
-//
-//        produto1.setFornecedor(fornecedorEletronicos);
-//        produto2.setFornecedor(fornecedorEletronicos);
-//        produto3.setFornecedor(fornecedorLivros);
-//        produto4.setFornecedor(fornecedorLivros);
-//
-//        produtoRepository.saveAll(List.of(produto1, produto2, produto3, produto4));
-//        System.out.println("Fornecedores estabelecidos!");
-//    }
-//
-//    public void testandoRelacionamentos(){
-//        System.out.println("Produtos na categoria Eletrônicos:");
-//        categoriaRepository.findById(1L).ifPresent(categoria ->
-//                categoria.getProdutos().forEach(produto ->
-//                        System.out.println(" - " + produto.getNome())
-//                )
-//        );
-//
-//        System.out.println("\nPedidos e seus produtos:");
-//        pedidoRepository.findAll().forEach(pedido -> {
-//            System.out.println("Pedido " + pedido.getId() + ":");
-//            pedido.getProdutos().forEach(produto ->
-//                    System.out.println(" - " + produto.getNome())
-//            );
-//        });
-//
-//        System.out.println("\nProdutos e seus fornecedores:");
-//        produtoRepository.findAll().forEach(produto ->
-//                System.out.println("Produto: " + produto.getNome() +
-//                        ", Fornecedor: " + produto.getFornecedor().getNome())
-//        );
-//    }
+    public void criarFornecedores() {
+        if (fornecedorRepository.count() > 0) return;
+        Fornecedor fornSamsung = new Fornecedor("Samsung Logística");
+        Fornecedor fornFastShop = new Fornecedor("Fast Shop Distribuidora");
+        Fornecedor fornKabum = new Fornecedor("Kabum Log");
+        Fornecedor fornArno = new Fornecedor("Arno Factory");
 
+        fornecedorRepository.saveAll(List.of(fornSamsung, fornFastShop, fornKabum, fornArno));
+    }
+
+    public void criarCategoria() {
+        if (categoriaRepository.count() > 0) return;
+        Categoria catEletronicos = new Categoria("Eletrônicos");
+        Categoria catEletrodomesticos = new Categoria("Eletrodomésticos");
+        Categoria catGamer = new Categoria("Gamer");
+
+        categoriaRepository.saveAll(List.of(catEletronicos, catEletrodomesticos, catGamer));
+    }
+
+    public void criarProdutos() {
+        if (produtoRepository.count() > 0) return;
+
+        var samsung = fornecedorRepository.findByNome("Samsung Logística").get();
+        var fastShop = fornecedorRepository.findByNome("Fast Shop Distribuidora").get();
+        var kabum = fornecedorRepository.findByNome("Kabum Log").get();
+        var arno = fornecedorRepository.findByNome("Arno Factory").get();
+
+        var eletronicos = categoriaRepository.findByNome("Eletrônicos").get();
+        var eletrodomesticos = categoriaRepository.findByNome("Eletrodomésticos").get();
+        var gamer = categoriaRepository.findByNome("Gamer").get();
+
+        List<Produto> produtos = new ArrayList<>();
+        produtos.add(new Produto("Smartphone Galaxy S23", 4500.00, samsung, eletronicos));
+        produtos.add(new Produto("Notebook Dell XPS", 8900.00, fastShop, eletronicos));
+        produtos.add(new Produto("Monitor LG Ultrawide 29", 1200.00, kabum, eletronicos));
+        produtos.add(new Produto("Tablet Tab S9", 3200.00, samsung, eletronicos));
+        produtos.add(new Produto("Smartwatch Watch 5", 1500.00, samsung, eletronicos));
+
+        produtos.add(new Produto("Geladeira Frost Free", 3100.00, fastShop, eletrodomesticos));
+        produtos.add(new Produto("Microondas Inox", 800.00, fastShop, eletrodomesticos));
+        produtos.add(new Produto("Air Fryer Family", 450.00, arno, eletrodomesticos));
+        produtos.add(new Produto("Cafeteira Expresso", 600.00, arno, eletrodomesticos));
+        produtos.add(new Produto("Aspirador Robô", 1800.00, kabum, eletrodomesticos));
+
+        produtos.add(new Produto("Mouse Logitech G Pro", 650.00, kabum, gamer));
+        produtos.add(new Produto("Teclado Mecânico HyperX", 750.00, kabum, gamer));
+        produtos.add(new Produto("Headset Cloud Stinger", 350.00, kabum, gamer));
+        produtos.add(new Produto("Cadeira Gamer DX", 1200.00, fastShop, gamer));
+        produtos.add(new Produto("Placa de Vídeo RTX 4060", 2500.00, kabum, gamer));
+
+        produtoRepository.saveAll(produtos);
+    }
+
+    public void criarPedidos() {
+        if (pedidoRepository.count() > 0) return;
+
+        var mouse = produtoRepository.findByNomeIgnoreCase("Mouse Logitech G Pro").get();
+        var teclado = produtoRepository.findByNomeIgnoreCase("Teclado Mecânico HyperX").get();
+        var headset = produtoRepository.findByNomeIgnoreCase("Headset Cloud Stinger").get();
+        var placaVideo = produtoRepository.findByNomeIgnoreCase("Placa de Vídeo RTX 4060").get();
+
+        var geladeira = produtoRepository.findByNomeIgnoreCase("Geladeira Frost Free").get();
+        var microondas = produtoRepository.findByNomeIgnoreCase("Microondas Inox").get();
+
+        var notebook = produtoRepository.findByNomeIgnoreCase("Notebook Dell XPS").get();
+        var monitor = produtoRepository.findByNomeIgnoreCase("Monitor LG Ultrawide 29").get();
+
+        var cafeteira = produtoRepository.findByNomeIgnoreCase("Cafeteira Expresso").get();
+
+        var tablet = produtoRepository.findByNomeIgnoreCase("Tablet Tab S9").get();
+        var airfryer = produtoRepository.findByNomeIgnoreCase("Air Fryer Family").get();
+
+        var galaxy = produtoRepository.findByNomeIgnoreCase("Smartphone Galaxy S23").get();
+        var watch = produtoRepository.findByNomeIgnoreCase("Smartwatch Watch 5").get();
+
+        List<Pedido> pedidos = new ArrayList<>();
+
+        Pedido pedidoGamer = new Pedido(
+                LocalDate.now().minusMonths(1),
+                LocalDate.now().minusMonths(1).plusDays(7),
+                Arrays.asList(mouse, teclado, headset, placaVideo)
+        );
+        pedidos.add(pedidoGamer);
+
+        Pedido pedidoCozinha = new Pedido(
+                LocalDate.now().minusWeeks(2),
+                LocalDate.now().minusWeeks(2).plusDays(3),
+                Arrays.asList(geladeira, microondas)
+        );
+        pedidos.add(pedidoCozinha);
+
+        Pedido pedidoHomeOffice = new Pedido(
+                LocalDate.now(),
+                LocalDate.now().plusDays(5),
+                Arrays.asList(notebook, monitor)
+        );
+        pedidos.add(pedidoHomeOffice);
+
+        Pedido pedidoCafe = new Pedido(
+                LocalDate.now().minusDays(1),
+                LocalDate.now().plusDays(1),
+                Arrays.asList(cafeteira)
+        );
+        pedidos.add(pedidoCafe);
+
+        Pedido pedidoMix = new Pedido(
+                LocalDate.now().minusMonths(2),
+                LocalDate.now().minusMonths(2).plusDays(10),
+                Arrays.asList(tablet, airfryer)
+        );
+        pedidos.add(pedidoMix);
+
+        Pedido pedidoPendente = new Pedido(
+                LocalDate.now(),
+                null,
+                Arrays.asList(galaxy, watch)
+        );
+        pedidos.add(pedidoPendente);
+
+        pedidoRepository.saveAll(pedidos);
+
+        System.out.println("5 Pedidos criados com sucesso!");
+    }
 }
