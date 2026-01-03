@@ -44,6 +44,7 @@ public class Principal {
                     11 - Ver produtos a cima de um valor específico
                     12 - Ver produtos com preço menor que o desejado ou através de um trecho do nome do produto
                     13 - Ver pedidos realizados após uma data
+                    14 - Ver pedidos realizados antes uma data
                     
                     0 - Sair                                 
                     """;
@@ -89,7 +90,10 @@ public class Principal {
                     buscarProdutosPorPrecoOuTrecho();
                     break;
                 case 13:
-                    buscarPedidosFeitosAposUmData();
+                    buscarPedidosFeitosAposData();
+                    break;
+                case 14:
+                    buscarPedidosFeitosAntesData();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -255,12 +259,22 @@ public class Principal {
         }
     }
 
-    private void buscarPedidosFeitosAposUmData() {
+    private void buscarPedidosFeitosAposData() {
         System.out.println("Ver pedidos feitos após qual data (yyyy-MM-dd)? ");
         var dataString = entrada.nextLine();
         LocalDate data = LocalDate.parse(dataString);
         List<Pedido> pedidosEncontrados = pedidoRepository.findByDataAfter(data);
 
+        pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " +p.getData()));
+    }
+
+
+    private void buscarPedidosFeitosAntesData() {
+        System.out.println("Ver pedidos feitos antes de qual data (yyyy-MM-dd)?");
+        var dataString = entrada.nextLine();
+
+        LocalDate data = LocalDate.parse(dataString);
+        List<Pedido> pedidosEncontrados = pedidoRepository.findByDataBefore(data);
         pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " +p.getData()));
     }
 

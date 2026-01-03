@@ -10,4 +10,5 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     List<Pedido> findByDataEntregaIsNull();
     List<Pedido> findByDataEntregaIsNotNull();
     List<Pedido> findByDataAfter(LocalDate data);
+    List<Pedido> findByDataBefore(LocalDate data);
 }
