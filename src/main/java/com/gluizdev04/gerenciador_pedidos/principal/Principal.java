@@ -42,6 +42,7 @@ public class Principal {
                     9 - Ver produtos de uma categoria específica ordenados pelo preço de forma decrescente
                     10 - Ver quantos produtos um categoria específica possui
                     11 - Ver produtos a cima de um valor específico
+                    12 - Ver produtos com preço menor que o desejado ou através de um trecho do nome do produto
                     
                     0 - Sair                                 
                     """;
@@ -82,6 +83,9 @@ public class Principal {
                     break;
                 case 11:
                     buscarQuantiaDeProdutosACimaDeUmValor();
+                    break;
+                case 12:
+                    buscarProdutosPorPrecoOuTrecho();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -229,6 +233,22 @@ public class Principal {
         long quantiaProduto = produtoRepository.countByPrecoGreaterThan(valor);
 
         System.out.println(quantiaProduto + " a cima de R$" + valor);
+    }
+
+    private void buscarProdutosPorPrecoOuTrecho() {
+        System.out.print("Ver produtos com o preço menor que: ");
+        var precoDesejado = entrada.nextDouble();
+        entrada.nextLine();
+        System.out.print("Trecho do nome do produto: ");
+        var trechoDesejado = entrada.nextLine();
+        List<Produto> produtosEncontrados = produtoRepository.findByPrecoLessThanOrNomeContainingIgnoreCase(precoDesejado, trechoDesejado);
+
+        if (!produtosEncontrados.isEmpty()) {
+            System.out.println("Produtos encontrados:");
+            produtosEncontrados.forEach(p -> System.out.println(p.getNome() + " valor: " + p.getPreco()));
+        } else {
+            System.out.println("Nenhum produto foi encontrado!");
+        }
     }
 
     public void criarFornecedores() {
