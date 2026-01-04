@@ -48,6 +48,7 @@ public class Principal {
                     15 - Ver pedidos realizados entre datas
                     16 - Os três produtos mais caros
                     17 - Os cinco produtos mais baratos de um categoria
+                    18 - Ver TODOS os produtos ordenador de forma crescente (valor)
                     
                     0 - Sair                                 
                     """;
@@ -106,6 +107,9 @@ public class Principal {
                     break;
                 case 17:
                     buscarCincoProdutosMaisBaratosDeCategoria();
+                    break;
+                case 18:
+                    ordenarTodosOsProdutosCrescenteValor();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -319,6 +323,13 @@ public class Principal {
         List<Produto> produtosEncontrados = produtoRepository.findTop5ByCategoriaNomeIgnoreCaseOrderByPrecoAsc(categoria);
         produtosEncontrados.forEach(p -> {
             System.out.println(p.getNome() + " | Valor: R$" + p.getPreco());
+        });
+    }
+
+    private void ordenarTodosOsProdutosCrescenteValor() {
+        List<Produto> produtosOrdenador = produtoRepository.ordenarPorValorCrescente();
+        produtosOrdenador.forEach(p -> {
+            System.out.println(p.getNome() + " Valor: R$" + p.getPreco());
         });
     }
 

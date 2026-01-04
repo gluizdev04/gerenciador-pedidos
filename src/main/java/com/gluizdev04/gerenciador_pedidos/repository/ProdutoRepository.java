@@ -32,4 +32,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     List<Produto> findTop3ByOrderByPrecoDesc();
 
     List<Produto> findTop5ByCategoriaNomeIgnoreCaseOrderByPrecoAsc(String categoria);
+
+    @Query("SELECT p FROM Produto p ORDER BY p.preco ASC")
+    List<Produto> ordenarPorValorCrescente();
 }
