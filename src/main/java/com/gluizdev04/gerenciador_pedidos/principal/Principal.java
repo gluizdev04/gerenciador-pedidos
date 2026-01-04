@@ -49,6 +49,7 @@ public class Principal {
                     16 - Os três produtos mais caros
                     17 - Os cinco produtos mais baratos de um categoria
                     18 - Ver TODOS os produtos ordenador de forma crescente (valor)
+                    19 - Ver TODOS os produtos ordenador de forma decrescente (valor)
                     
                     0 - Sair                                 
                     """;
@@ -110,6 +111,9 @@ public class Principal {
                     break;
                 case 18:
                     ordenarTodosOsProdutosCrescenteValor();
+                    break;
+                case 19:
+                    ordenarTodosOsProdutosDecrescenteValor();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -327,8 +331,15 @@ public class Principal {
     }
 
     private void ordenarTodosOsProdutosCrescenteValor() {
-        List<Produto> produtosOrdenador = produtoRepository.ordenarPorValorCrescente();
-        produtosOrdenador.forEach(p -> {
+        List<Produto> produtosOrdenadosCrescente = produtoRepository.ordenarPorValorCrescente();
+        produtosOrdenadosCrescente.forEach(p -> {
+            System.out.println(p.getNome() + " Valor: R$" + p.getPreco());
+        });
+    }
+
+    private void ordenarTodosOsProdutosDecrescenteValor() {
+        List<Produto> produtosOrdenadosDecrescente = produtoRepository.ordenarPorValorDecrescente();
+        produtosOrdenadosDecrescente.forEach(p -> {
             System.out.println(p.getNome() + " Valor: R$" + p.getPreco());
         });
     }
