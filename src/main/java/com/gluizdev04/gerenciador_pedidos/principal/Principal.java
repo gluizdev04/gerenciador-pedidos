@@ -50,6 +50,7 @@ public class Principal {
                     17 - Os cinco produtos mais baratos de um categoria
                     18 - Ver TODOS os produtos ordenador de forma crescente (valor)
                     19 - Ver TODOS os produtos ordenador de forma decrescente (valor)
+                    20 - Produtos que se iniciam com uma letra especifica
                     
                     0 - Sair                                 
                     """;
@@ -114,6 +115,9 @@ public class Principal {
                     break;
                 case 19:
                     ordenarTodosOsProdutosDecrescenteValor();
+                    break;
+                case 20:
+                    produtosQueIniciamComUmaLetraEspecifica();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -340,6 +344,16 @@ public class Principal {
     private void ordenarTodosOsProdutosDecrescenteValor() {
         List<Produto> produtosOrdenadosDecrescente = produtoRepository.ordenarPorValorDecrescente();
         produtosOrdenadosDecrescente.forEach(p -> {
+            System.out.println(p.getNome() + " Valor: R$" + p.getPreco());
+        });
+    }
+
+    private void produtosQueIniciamComUmaLetraEspecifica() {
+        System.out.print("Deseja buscar produtos que comecem com qual letra? ");
+        var letraInicial = entrada.nextLine();
+
+        List<Produto> produtosEncontrados = produtoRepository.buscarProdutoComInicioEspecifico(letraInicial);
+        produtosEncontrados.forEach(p -> {
             System.out.println(p.getNome() + " Valor: R$" + p.getPreco());
         });
     }

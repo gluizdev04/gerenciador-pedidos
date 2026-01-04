@@ -38,4 +38,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     @Query("SELECT p FROM Produto p ORDER BY p.preco DESC")
     List<Produto> ordenarPorValorDecrescente();
+
+    @Query("SELECT p FROM Produto p WHERE p.nome ILIKE :letraInicial%")
+    List<Produto> buscarProdutoComInicioEspecifico(String letraInicial);
 }
