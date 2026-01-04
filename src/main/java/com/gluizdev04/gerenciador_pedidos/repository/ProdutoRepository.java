@@ -17,4 +17,5 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     long countByCategoriaNomeIgnoreCase(String categoriaNome);
     long countByPrecoGreaterThan(Double preco);
     List<Produto> findByPrecoLessThanOrNomeContainingIgnoreCase(Double preco, String nome);
+    List<Produto> findTop3ByOrderByPrecoDesc();
 }

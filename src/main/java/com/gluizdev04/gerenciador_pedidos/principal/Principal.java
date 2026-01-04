@@ -46,6 +46,7 @@ public class Principal {
                     13 - Ver pedidos realizados após uma data
                     14 - Ver pedidos realizados antes uma data
                     15 - Ver pedidos realizados entre datas
+                    16 - Os três produtos mais caros
                     
                     0 - Sair                                 
                     """;
@@ -98,6 +99,9 @@ public class Principal {
                     break;
                 case 15:
                     buscarPedidosFeitosEntreDatas();
+                    break;
+                case 16:
+                    buscarOsTresProdutosMaisCaros();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -293,6 +297,14 @@ public class Principal {
         List<Pedido> pedidosEncontrados = pedidoRepository.findByDataBetween(dataInicio, dataFim);
 
         pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " +p.getData()));
+    }
+
+    private void buscarOsTresProdutosMaisCaros() {
+        List<Produto> produtosEncontrados = produtoRepository.findTop3ByOrderByPrecoDesc();
+        System.out.println("Os três produtos mais caros:");
+        produtosEncontrados.forEach(p -> {
+            System.out.println(p.getNome() + " | Valor: R$" + p.getPreco());
+        });
     }
 
     public void criarFornecedores() {
