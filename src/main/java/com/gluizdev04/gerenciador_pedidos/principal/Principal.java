@@ -45,6 +45,7 @@ public class Principal {
                     12 - Ver produtos com preço menor que o desejado ou através de um trecho do nome do produto
                     13 - Ver pedidos realizados após uma data
                     14 - Ver pedidos realizados antes uma data
+                    15 - Ver pedidos realizados entre datas
                     
                     0 - Sair                                 
                     """;
@@ -94,6 +95,9 @@ public class Principal {
                     break;
                 case 14:
                     buscarPedidosFeitosAntesData();
+                    break;
+                case 15:
+                    buscarPedidosFeitosEntreDatas();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -275,6 +279,19 @@ public class Principal {
 
         LocalDate data = LocalDate.parse(dataString);
         List<Pedido> pedidosEncontrados = pedidoRepository.findByDataBefore(data);
+        pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " +p.getData()));
+    }
+
+
+    private void buscarPedidosFeitosEntreDatas() {
+        System.out.println("Data inical (yyyy-MM-dd): ");
+        var dataInicioString = entrada.nextLine();
+        System.out.println("Data fim (yyyy-MM-dd): ");
+        var dataFimString = entrada.nextLine();
+        LocalDate dataInicio = LocalDate.parse(dataInicioString);
+        LocalDate dataFim = LocalDate.parse(dataFimString);
+        List<Pedido> pedidosEncontrados = pedidoRepository.findByDataBetween(dataInicio, dataFim);
+
         pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " +p.getData()));
     }
 
