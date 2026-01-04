@@ -47,6 +47,7 @@ public class Principal {
                     14 - Ver pedidos realizados antes uma data
                     15 - Ver pedidos realizados entre datas
                     16 - Os três produtos mais caros
+                    17 - Os cinso produtos mais baratos de um categoria
                     
                     0 - Sair                                 
                     """;
@@ -102,6 +103,9 @@ public class Principal {
                     break;
                 case 16:
                     buscarOsTresProdutosMaisCaros();
+                    break;
+                case 17:
+                    buscarCincoProdutosMaisBaratosDeCategoria();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -302,6 +306,17 @@ public class Principal {
     private void buscarOsTresProdutosMaisCaros() {
         List<Produto> produtosEncontrados = produtoRepository.findTop3ByOrderByPrecoDesc();
         System.out.println("Os três produtos mais caros:");
+        produtosEncontrados.forEach(p -> {
+            System.out.println(p.getNome() + " | Valor: R$" + p.getPreco());
+        });
+    }
+
+    private void buscarCincoProdutosMaisBaratosDeCategoria() {
+        List<Categoria> categorias = categoriaRepository.findAll();
+        categorias.forEach(c -> System.out.println(c.getNome()));
+        System.out.print("Qual categoria? ");
+        var categoria = entrada.nextLine();
+        List<Produto> produtosEncontrados = produtoRepository.findTop5ByCategoriaNomeIgnoreCaseOrderByPrecoAsc(categoria);
         produtosEncontrados.forEach(p -> {
             System.out.println(p.getNome() + " | Valor: R$" + p.getPreco());
         });
