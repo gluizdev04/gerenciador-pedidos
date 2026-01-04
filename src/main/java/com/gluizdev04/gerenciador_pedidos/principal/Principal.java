@@ -41,13 +41,13 @@ public class Principal {
                     8 - Ver produtos de uma categoria específica ordenados pelo preço de forma crescente
                     9 - Ver produtos de uma categoria específica ordenados pelo preço de forma decrescente
                     10 - Ver quantos produtos um categoria específica possui
-                    11 - Ver produtos a cima de um valor específico
+                    11 - Ver a quantia de produtos a cima de um valor específico
                     12 - Ver produtos com preço menor que o desejado ou através de um trecho do nome do produto
                     13 - Ver pedidos realizados após uma data
                     14 - Ver pedidos realizados antes uma data
                     15 - Ver pedidos realizados entre datas
                     16 - Os três produtos mais caros
-                    17 - Os cinso produtos mais baratos de um categoria
+                    17 - Os cinco produtos mais baratos de um categoria
                     
                     0 - Sair                                 
                     """;
@@ -143,7 +143,7 @@ public class Principal {
     private void buscarProdutosAPartirDeValorFornecido() {
         System.out.print("Deseja ver produtos com preço a partir de: ");
         var valor = entrada.nextDouble();
-        List<Produto> produtosEncontrados = produtoRepository.findByPrecoGreaterThan(valor);
+        List<Produto> produtosEncontrados = produtoRepository.buscarProdutoAPartirDeUmValor(valor);
 
         if (!produtosEncontrados.isEmpty()) {
             System.out.println("Produtos a cima de: " + valor);
