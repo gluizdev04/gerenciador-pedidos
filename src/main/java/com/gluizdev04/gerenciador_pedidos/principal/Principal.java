@@ -51,6 +51,7 @@ public class Principal {
                     18 - Ver TODOS os produtos ordenador de forma crescente (valor)
                     19 - Ver TODOS os produtos ordenador de forma decrescente (valor)
                     20 - Produtos que se iniciam com uma letra especifica
+                    21 - Média de preço dos produtos
                     
                     0 - Sair                                 
                     """;
@@ -118,6 +119,9 @@ public class Principal {
                     break;
                 case 20:
                     produtosQueIniciamComUmaLetraEspecifica();
+                    break;
+                case 21:
+                    mediaPrecoProdutos();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -356,6 +360,11 @@ public class Principal {
         produtosEncontrados.forEach(p -> {
             System.out.println(p.getNome() + " Valor: R$" + p.getPreco());
         });
+    }
+
+    private void mediaPrecoProdutos() {
+        Double mediaPreco = produtoRepository.mediaPrecoProdutos();
+        System.out.println("Média de preco dos produtos: " + mediaPreco);
     }
 
     public void criarFornecedores() {

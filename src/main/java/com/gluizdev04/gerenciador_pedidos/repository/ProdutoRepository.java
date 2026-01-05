@@ -41,4 +41,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     @Query("SELECT p FROM Produto p WHERE p.nome ILIKE :letraInicial%")
     List<Produto> buscarProdutoComInicioEspecifico(String letraInicial);
+
+    @Query("SELECT AVG(p.preco) FROM Produto p")
+    Double mediaPrecoProdutos();
 }
