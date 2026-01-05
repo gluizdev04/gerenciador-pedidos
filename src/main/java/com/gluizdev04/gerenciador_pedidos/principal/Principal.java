@@ -310,7 +310,7 @@ public class Principal {
         var dataFimString = entrada.nextLine();
         LocalDate dataInicio = LocalDate.parse(dataInicioString);
         LocalDate dataFim = LocalDate.parse(dataFimString);
-        List<Pedido> pedidosEncontrados = pedidoRepository.findByDataBetween(dataInicio, dataFim);
+        List<Pedido> pedidosEncontrados = pedidoRepository.pedidoEntrePeriodo(dataInicio, dataFim);
 
         pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " +p.getData()));
     }
