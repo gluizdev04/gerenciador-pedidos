@@ -44,4 +44,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     @Query("SELECT AVG(p.preco) FROM Produto p")
     Double mediaPrecoProdutos();
+
+    @Query("SELECT MAX(p.preco) FROM Produto p WHERE p.categoria.nome ILIKE :categoriaDesejada")
+    Double produtoMaisCaroCategoria(String categoriaDesejada);
 }

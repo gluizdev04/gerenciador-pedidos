@@ -40,7 +40,7 @@ public class Principal {
                     7 - Produtos com data de entrega
                     8 - Ver produtos de uma categoria específica ordenados pelo preço de forma crescente
                     9 - Ver produtos de uma categoria específica ordenados pelo preço de forma decrescente
-                    10 - Ver quantos produtos um categoria específica possui
+                    10 - Ver quantos produtos uma categoria específica possui
                     11 - Ver a quantia de produtos a cima de um valor específico
                     12 - Ver produtos com preço menor que o desejado ou através de um trecho do nome do produto
                     13 - Ver pedidos realizados após uma data
@@ -52,6 +52,7 @@ public class Principal {
                     19 - Ver TODOS os produtos ordenador de forma decrescente (valor)
                     20 - Produtos que se iniciam com uma letra especifica
                     21 - Média de preço dos produtos
+                    22 - Produto mais caro de um categoria
                     
                     0 - Sair                                 
                     """;
@@ -122,6 +123,9 @@ public class Principal {
                     break;
                 case 21:
                     mediaPrecoProdutos();
+                    break;
+                case 22:
+                    produtoMaisCaroCategoria();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -365,6 +369,13 @@ public class Principal {
     private void mediaPrecoProdutos() {
         Double mediaPreco = produtoRepository.mediaPrecoProdutos();
         System.out.println("Média de preco dos produtos: " + mediaPreco);
+    }
+
+    private void produtoMaisCaroCategoria() {
+        System.out.print("Ver produto mais caro de qual categoria? ");
+        var categoriaDesejado = entrada.nextLine();
+        Double produtoMaisCaro = produtoRepository.produtoMaisCaroCategoria(categoriaDesejado);
+        System.out.println("O produto mais caro da categoria " + categoriaDesejado + " custa: R$" + produtoMaisCaro);
     }
 
     public void criarFornecedores() {
