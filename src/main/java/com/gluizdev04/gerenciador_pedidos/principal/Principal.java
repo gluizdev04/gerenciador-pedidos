@@ -53,6 +53,7 @@ public class Principal {
                     20 - Produtos que se iniciam com uma letra especifica
                     21 - Média de preço dos produtos
                     22 - Produto mais caro de um categoria
+                    23 - Quantia de produto por categoria
                     
                     0 - Sair                                 
                     """;
@@ -126,6 +127,9 @@ public class Principal {
                     break;
                 case 22:
                     produtoMaisCaroCategoria();
+                    break;
+                case 23:
+                    quantiaProdutoCategoria();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -297,7 +301,7 @@ public class Principal {
         LocalDate data = LocalDate.parse(dataString);
         List<Pedido> pedidosEncontrados = pedidoRepository.findByDataAfter(data);
 
-        pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " +p.getData()));
+        pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " + p.getData()));
     }
 
 
@@ -307,7 +311,7 @@ public class Principal {
 
         LocalDate data = LocalDate.parse(dataString);
         List<Pedido> pedidosEncontrados = pedidoRepository.findByDataBefore(data);
-        pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " +p.getData()));
+        pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " + p.getData()));
     }
 
 
@@ -320,7 +324,7 @@ public class Principal {
         LocalDate dataFim = LocalDate.parse(dataFimString);
         List<Pedido> pedidosEncontrados = pedidoRepository.pedidoEntrePeriodo(dataInicio, dataFim);
 
-        pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " +p.getData()));
+        pedidosEncontrados.forEach(p -> System.out.println("Pedido com ID " + p.getId() + " foi feito em " + p.getData()));
     }
 
     private void buscarOsTresProdutosMaisCaros() {
@@ -376,6 +380,19 @@ public class Principal {
         var categoriaDesejado = entrada.nextLine();
         Double produtoMaisCaro = produtoRepository.produtoMaisCaroCategoria(categoriaDesejado);
         System.out.println("O produto mais caro da categoria " + categoriaDesejado + " custa: R$" + produtoMaisCaro);
+    }
+
+    private void quantiaProdutoCategoria() {
+        List<Object[]> resultados = produtoRepository.contarQuatiaProdutoCategoria();
+
+        System.out.println("Conta de produtos: ");
+
+        for (Object[] resultado : resultados) {
+            String nomeProduto = (String) resultado[0];
+            Long quantiaProduto = (Long) resultado[1];
+
+            System.out.println("Categoria: " + nomeProduto + " | Quantidade: " + quantiaProduto);
+        }
     }
 
     public void criarFornecedores() {

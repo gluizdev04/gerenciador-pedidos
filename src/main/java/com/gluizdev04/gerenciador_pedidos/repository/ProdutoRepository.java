@@ -47,4 +47,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     @Query("SELECT MAX(p.preco) FROM Produto p WHERE p.categoria.nome ILIKE :categoriaDesejada")
     Double produtoMaisCaroCategoria(String categoriaDesejada);
+
+    @Query("SELECT c.nome, COUNT(p) FROM Produto p JOIN p.categoria c GROUP BY c.nome")
+    List<Object[]> contarQuatiaProdutoCategoria();
 }
