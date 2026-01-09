@@ -1,5 +1,6 @@
 package com.gluizdev04.gerenciador_pedidos.repository;
 
+import com.gluizdev04.gerenciador_pedidos.model.Categoria;
 import com.gluizdev04.gerenciador_pedidos.model.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -50,4 +51,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     @Query("SELECT c.nome, COUNT(p) FROM Produto p JOIN p.categoria c GROUP BY c.nome")
     List<Object[]> contarQuatiaProdutoCategoria();
+
+    @Query("SELECT c.nome, COUNT(p) FROM Produto p JOIN p.categoria c GROUP BY c.nome HAVING COUNT(p) > :quantiaProduto")
+    List<Object[]> categoriaComMaisDe(Long quantiaProduto);
 }

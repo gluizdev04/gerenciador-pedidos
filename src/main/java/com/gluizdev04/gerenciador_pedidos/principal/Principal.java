@@ -54,6 +54,7 @@ public class Principal {
                     21 - Média de preço dos produtos
                     22 - Produto mais caro de um categoria
                     23 - Quantia de produto por categoria
+                    24 - Categorias com mais de 10 produtos
                     
                     0 - Sair                                 
                     """;
@@ -130,6 +131,9 @@ public class Principal {
                     break;
                 case 23:
                     quantiaProdutoCategoria();
+                    break;
+                case 24:
+                    categoriaComMaisDeUmaQuantiaEspecificaDeProdutos();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -392,6 +396,19 @@ public class Principal {
             Long quantiaProduto = (Long) resultado[1];
 
             System.out.println("Categoria: " + nomeProduto + " | Quantidade: " + quantiaProduto);
+        }
+    }
+
+    private void categoriaComMaisDeUmaQuantiaEspecificaDeProdutos() {
+        System.out.print("Ver categorias que possuem mais de quantos produtos? ");
+        var quantiaDeProdutos = entrada.nextLong();
+        List<Object[]> resultados = produtoRepository.categoriaComMaisDe(quantiaDeProdutos);
+
+        for (Object[] resultado : resultados) {
+            String categoriaNome = (String) resultado[0];
+            Long contagemProduto = (Long) resultado[1];
+
+            System.out.println("Categoria " + categoriaNome + " possui " + contagemProduto + " produtos");
         }
     }
 
