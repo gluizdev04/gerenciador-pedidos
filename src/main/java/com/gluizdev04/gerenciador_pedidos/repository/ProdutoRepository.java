@@ -54,4 +54,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     @Query("SELECT c.nome, COUNT(p) FROM Produto p JOIN p.categoria c GROUP BY c.nome HAVING COUNT(p) > :quantiaProduto")
     List<Object[]> categoriaComMaisDe(Long quantiaProduto);
+
+    @Query("SELECT p FROM Produto p JOIN p.categoria c WHERE p.nome ILIKE :trechoNome OR c.nome ILIKE :categoria")
+    List<Produto> produtosPorTrechoNomeOuCategoria(String trechoNome, String categoria);
 }

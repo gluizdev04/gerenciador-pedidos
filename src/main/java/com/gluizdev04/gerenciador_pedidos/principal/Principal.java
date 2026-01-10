@@ -55,6 +55,7 @@ public class Principal {
                     22 - Produto mais caro de um categoria
                     23 - Quantia de produto por categoria
                     24 - Categorias com mais de 10 produtos
+                    25 - Filtrar produtos por nome ou categoria
                     
                     0 - Sair                                 
                     """;
@@ -134,6 +135,9 @@ public class Principal {
                     break;
                 case 24:
                     categoriaComMaisDeUmaQuantiaEspecificaDeProdutos();
+                    break;
+                case 25:
+                    produtosPorNomeOuPorCategoria();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -410,6 +414,18 @@ public class Principal {
 
             System.out.println("Categoria " + categoriaNome + " possui " + contagemProduto + " produtos");
         }
+    }
+
+    private void produtosPorNomeOuPorCategoria() {
+        System.out.print("Trecho do nome do produto: ");
+        var trechoNome = entrada.nextLine();
+        System.out.println("Digite a categoria: ");
+        var categoria = entrada.nextLine();
+        List<Produto> produtosEncontrados = produtoRepository.produtosPorTrechoNomeOuCategoria(trechoNome, categoria);
+
+        produtosEncontrados.forEach(p -> {
+            System.out.println(p.getNome() + " Preco: R$" + p.getPreco());
+        });
     }
 
     public void criarFornecedores() {
