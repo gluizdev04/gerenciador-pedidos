@@ -56,6 +56,7 @@ public class Principal {
                     23 - Quantia de produto por categoria
                     24 - Categorias com mais de 10 produtos
                     25 - Filtrar produtos por nome ou categoria
+                    26 - Os top 5 produtos mais caro
                     
                     0 - Sair                                 
                     """;
@@ -138,6 +139,9 @@ public class Principal {
                     break;
                 case 25:
                     produtosPorNomeOuPorCategoria();
+                    break;
+                case 26:
+                    cincoProdutosMaisCaros();
                     break;
                 case 0:
                     menuExibindo = false;
@@ -425,6 +429,14 @@ public class Principal {
 
         produtosEncontrados.forEach(p -> {
             System.out.println(p.getNome() + " Preco: R$" + p.getPreco());
+        });
+    }
+
+    private void cincoProdutosMaisCaros() {
+        List<Produto> produtosEncontrados = produtoRepository.top5ProdutosMaisCaros();
+
+        produtosEncontrados.forEach(p -> {
+            System.out.println(p.getNome() + " Valor: R$" + p.getPreco());
         });
     }
 

@@ -57,4 +57,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     @Query("SELECT p FROM Produto p JOIN p.categoria c WHERE p.nome ILIKE :trechoNome OR c.nome ILIKE :categoria")
     List<Produto> produtosPorTrechoNomeOuCategoria(String trechoNome, String categoria);
+
+    @Query(value = "SELECT * FROM produto ORDER BY valor DESC LIMIT 5", nativeQuery = true)
+    List<Produto> top5ProdutosMaisCaros();
 }
